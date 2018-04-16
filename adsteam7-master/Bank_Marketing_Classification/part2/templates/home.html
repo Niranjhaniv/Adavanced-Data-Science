@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+   <title>Petition Page</title>
+  <meta charset = "UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+      <script type = "text/javascript"
+         src = "{{ url_for('static', filename = 'redirect.js') }}" ></script>
+   <!--<link rel="stylesheet" href="../static/style.css">-->
+   <style>
+               body {font-family: Arial, Helvetica, sans-serif;}
+        form {border: 3px solid #f1f1f1;}
+        label{
+           color:  #FFFFFF;
+        }
+
+        input[type=text], input[type=password] {
+            width: 100%;
+            padding: 12px 20px;
+            margin: 8px 0;
+            display: inline-block;
+            border: 1px solid #ccc;
+            box-sizing: border-box;
+        }
+
+        button {
+            background-color: #4CAF50;
+            color: white;
+            padding: 14px 20px;
+            margin: 8px 0;
+            border: none;
+            cursor: pointer;
+            width: 25%;
+        }
+
+        button:hover {
+            opacity: 0.8;
+        }
+
+        .buttonVal {
+            width: auto;
+            padding: 10px 18px;
+            background-color: #f44336;
+        }
+
+        .imgcontainer {
+            text-align: center;
+            margin: 24px 0 12px 0;
+        }
+
+        img.avatar {
+            width: 5%;
+            border-radius: 50%;
+        }
+
+        .container {
+            margin: auto;
+            background-color: #A9A9A9;
+            width: 100%;
+            border: 3px solid #000000;
+            padding: 10px;
+        }
+
+        .containerinside {
+            margin: auto;
+            width: 50%;
+            border: 3px solid #FFFFFF;
+            padding: 10px;
+        }
+
+        span.psw {
+            float: right;
+            padding-top: 16px;
+        }
+
+        /* Change styles for span and cancel button on extra small screens */
+        @media screen and (max-width: 300px) {
+            span.psw {
+               display: block;
+               float: none;
+            }
+            .cancelbtn {
+               width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+
+    <!-- Nav tabs -->
+    <ul class="nav nav-tabs" role="tablist">
+      <li class="active">
+          <a href="#home" role="tab" data-toggle="tab">
+              <icon class="fa fa-home"></icon> Home
+          </a>
+      </li>
+      <li><a href="#predict" role="tab" data-toggle="tab">
+         Predict
+          </a>
+      </li>
+    </ul>
+
+    <!-- Tab panes -->
+    <div class="tab-content">
+      <div class="tab-pane fade active in" id="home">
+          <h2>About Bank Marketing Data Set </h2>
+          <h3>Data Set Information:</h3>
+              <p>The data is related with direct marketing campaigns of a Portuguese banking institution. The marketing campaigns were based on phone calls. Often, more than one contact to the same client was required, in order to access if the product (bank term deposit) would be ('yes') or not ('no') subscribed.
+
+                  There are four datasets: </p>
+<ol>
+    <li> bank-additional-full.csv with all examples (41188) and 20 inputs, ordered by date (from May 2008 to November 2010), very close to the data analyzed in [Moro et al., 2014]
+<li>  bank-additional.csv with 10% of the examples (4119), randomly selected from 1), and 20 inputs.</li>
+<li>  bank-full.csv with all examples and 17 inputs, ordered by date (older version of this dataset with less inputs). </li>
+<li>  bank.csv with 10% of the examples and 17 inputs, randomly selected from 3 (older version of this dataset with less inputs). </li>
+</li>The smallest datasets are provided to test more computationally demanding machine learning algorithms (e.g., SVM). </li>
+
+</li>The classification goal is to predict if the client will subscribe (yes/no) a term deposit (variable y).</li>
+</ol>
+
+              <h3>Attribute Information:</h3>
+              <p>Input variables:
+                # bank client data:
+                <ol>
+          <li>  -age (numeric) </li>
+            <li>      - job : type of job (categorical: 'admin.','blue-collar','entrepreneur','housemaid','management','retired','self-employed','services','student','technician','unemployed','unknown') </li>
+             <li>     - marital : marital status (categorical: 'divorced','married','single','unknown'; note: 'divorced' means divorced or widowed)</li>
+             <li>     - education (categorical: 'basic.4y','basic.6y','basic.9y','high.school','illiterate','professional.course','university.degree','unknown')</li>
+             <li>     - default: has credit in default? (categorical: 'no','yes','unknown')</li>
+              <li>    - housing: has housing loan? (categorical: 'no','yes','unknown')</li>
+              <li>    - loan: has personal loan? (categorical: 'no','yes','unknown')</li>
+                        # related with the last contact of the current campaign:
+              <li>    - contact: contact communication type (categorical: 'cellular','telephone')</li>
+              <li>    - month: last contact month of year (categorical: 'jan', 'feb', 'mar', ..., 'nov', 'dec')</li>
+              <li>    - day_of_week: last contact day of the week (categorical: 'mon','tue','wed','thu','fri')</li>
+              <li>    - duration: last contact duration, in seconds (numeric). Important note: this attribute highly affects the output target (e.g., if duration=0 then y='no'). Yet, the duration is not known before a call is performed. Also, after the end of the call y is obviously known. Thus, this input should only be included for benchmark purposes and should be discarded if the intention is to have a realistic predictive model.</li>
+                # other attributes:
+              <li>    - campaign: number of contacts performed during this campaign and for this client (numeric, includes last contact)</li>
+              <li>    - pdays: number of days that passed by after the client was last contacted from a previous campaign (numeric; 999 means client was not previously contacted)</li>
+              <li>    - previous: number of contacts performed before this campaign and for this client (numeric)</li>
+              <li>    - poutcome: outcome of the previous marketing campaign (categorical: 'failure','nonexistent','success')</li>
+                # social and economic context attributes</li>
+              <li>    - emp.var.rate: employment variation rate - quarterly indicator (numeric)</li>
+              <li>    - cons.price.idx: consumer price index - monthly indicator (numeric)</li>
+              <li>    - cons.conf.idx: consumer confidence index - monthly indicator (numeric)</li>
+              <li>    - euribor3m: euribor 3 month rate - daily indicator (numeric)</li>
+              <li>    - nr.employed: number of employees - quarterly indicator (numeric)</li>
+
+                Output variable (desired target):
+          <li>  21 - y - has the client subscribed a term deposit? (binary: 'yes','no')</li></ol></p>
+
+
+      </div>
+      <div class="tab-pane fade" id="predict">
+            <form method="POST" style="background:url(../static/background.jpg)"  action="/uploadJson" enctype=multipart/form-data>
+              <div class="imgcontainer">
+                <img src="../static/fileUpload.png" alt="Avatar" class="avatar">
+              </div>
+
+             <center> <div class="containerinside">
+                  <input type="radio" name="uploadtype" value="single"><label>Single</label></input>
+                   <input type="radio" name="uploadtype" value="bulk"><label>Bulk</label></input>
+
+                      <select class="form-control" name="model" id="model">
+                        <option>MLP</option>
+                        <option>SGD</option>
+                        <option>Logistic Regression</option>
+                      </select>
+
+                  <font color="#FFFFFF"><h2><b>UPLOAD File </b></h2></font>
+
+
+                <center><label for="uploaded"><b>Select the file to be uploaded</b></label></center>
+              </div></center>
+               <font color="#FFFFFF"> <center>
+                      <div class="containerinside" width="10px" style="background-color: transparent">
+                        <p><input type=file name=file>
+
+                            <button  onclick="redirect()" type="submit" class="btn btn-default">Upload</button>
+                      </div>
+               </center></font>>
+                <br>
+                <br>
+                <br>
+                <br>
+                <br>
+          </form>
+
+
+      </div>
+    </div>
+
+</div>
+
+
+</body>
+</html>

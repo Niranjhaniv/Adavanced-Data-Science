@@ -1,0 +1,2 @@
+docker pull gaurangdavda/hw1_part1
+docker pull gaurangdavda/hw1_part2
